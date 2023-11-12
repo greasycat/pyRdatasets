@@ -53,8 +53,11 @@ def get_version_info():
     elif os.path.exists('rdatasets/version.py'):
         # must be a source distribution, use existing version file
         # load it as a separate module to not load pywt/__init__.py
-        import imp
-        version = imp.load_source('rdatasets.version', 'rdatasets/version.py')
+        from importlib import machinery, invalidate_caches
+        # import imp
+        # version = imp.load_source('rdatasets.version', 'rdatasets/version.py')
+        version = machinery.SourceFileLoader('rdatasets.version', 'rdatasets/version.py').load_module()
+
         GIT_REVISION = version.git_revision
     else:
         GIT_REVISION = "Unknown"
@@ -93,9 +96,9 @@ if __name__ == '__main__':
     
     setup(
         name="rdatasets",
-        maintainer="Holger Nahrstaedt",
-        maintainer_email="holger@nahrstaedt.de",
-        url="https://github.com/holgern/pyRdatasets",
+        maintainer="Greasy Cat",
+        maintainer_email="131315c@gmail.com",
+        url="https://github.com/greasycat/pyRdatasets",
         license="GPLv3",
         description="package that provides over 1000 datasets from various R packages",
         long_description=open('README.md').read(),
